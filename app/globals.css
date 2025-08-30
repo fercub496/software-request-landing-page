@@ -13,6 +13,10 @@
   background-color: var(--lucuma-dark);
 }
 
+.bg-lucuma-light {
+  background-color: var(--lucuma-light);
+}
+
 /*@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

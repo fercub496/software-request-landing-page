@@ -23,6 +23,8 @@ export default function Navbar() {
         <li><Link href="/" className="transition-colors duration-300 hover:text-yellow-400">Inicio</Link></li>
         <li><Link href="#funcionalidades" className="transition-colors duration-300 hover:text-yellow-400">Funcionalidades</Link></li>
         <li><Link href="#testimonios" className="transition-colors duration-300 hover:text-yellow-400">Testimonios</Link></li>
+        <li><Link href="/login" className="transition-colors duration-300 hover:text-yellow-400">Login</Link></li>
+        <li><Link href="/register" className="transition-colors duration-300 hover:text-yellow-400">Registrarse</Link></li>
         <li><Link href="/form" className="transition-colors duration-300 hover:text-yellow-400">Formulario</Link></li>
       </ul>
 
@@ -32,6 +34,8 @@ export default function Navbar() {
           <li><Link href="/" className="hover:text-yellow-400 transition-colors duration-300" onClick={() => setOpen(false)}>Inicio</Link></li>
           <li><Link href="#funcionalidades" className="hover:text-yellow-400 transition-colors duration-300" onClick={() => setOpen(false)}>Funcionalidades</Link></li>
           <li><Link href="#testimonios" className="hover:text-yellow-400 transition-colors duration-300" onClick={() => setOpen(false)}>Testimonios</Link></li>
+          <li><Link href="/login" className="hover:text-yellow-400 transition-colors duration-300" onClick={() => setOpen(false)}>Login</Link></li>
+          <li><Link href="/register" className="hover:text-yellow-400 transition-colors duration-300" onClick={() => setOpen(false)}>Registrarse</Link></li>
           <li><Link href="/form" className="hover:text-yellow-400 transition-colors duration-300" onClick={() => setOpen(false)}>Formulario</Link></li>
         </ul>
       )}
