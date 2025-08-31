@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-type User = { id: string; name: string; email: string }
+type User = {id?: string; _id?: string; name: string; email: string }
 
 export default function AdminPage() {
   const [users, setUsers] = useState<User[]>([])
@@ -10,9 +10,9 @@ export default function AdminPage() {
   useEffect(() => {
     fetch("/api/admin/users")
       .then(r => r.json())
-      .then(data => {
+      .then((data: User[]) => {
       // Map _id to id for each user
-      const usersWithId = data.map((u: any) => ({
+      const usersWithId = data.map((u) => ({
         id: u._id?.toString() ?? "",
         name: u.name,
         email: u.email,

@@ -1,9 +1,33 @@
-import NextAuth, { NextAuthOptions, Session, User as NextAuthUser } from "next-auth"
-import { JWT } from "next-auth/jwt"
+import NextAuth, { NextAuthOptions, Session, User as NextAuthUser,DefaultSession, DefaultUser } from "next-auth"
+import { JWT as DefaultJWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "../lib/mongodb";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      role: string;
+      name: string;
+      email: string;
+    } & DefaultSession["user"];
+  }
+  interface User extends DefaultUser {
+    id: string;
+    role: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT extends DefaultJWT {
+    id: string;
+    role: string;
+    name: string;
+    email: string;
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -32,19 +56,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
       if (user) {
-        token.role = (user as any).role;
-        token.id = (user as any).id;
-        token.name = (user as any).name;
-        token.email = (user as any).email;
+        token.role = user.role;
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
       }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       if (session.user) {
-        (session.user as any).id = token.id;
-        (session.user as any).role = token.role;
-        (session.user as any).name = token.name;
-        (session.user as any).email = token.email;
+        session.user.id = token.id;
+        session.user.role = token.role;
+        session.user.name = token.name;
+        session.user.email = token.email;
       }
       return session;
     },
