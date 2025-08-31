@@ -3,18 +3,6 @@ import { authOptions } from "../../auth/[...nextauth]/route";
 import { connectDB } from "../../auth/lib/mongodb";
 import User from "../../auth/models/User";
 
-// Extend the Session type to include 'role'
-declare module "next-auth" {
-  interface Session {
-    user?: {
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
-      role?: string | null;
-    };
-  }
-}
-
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
 

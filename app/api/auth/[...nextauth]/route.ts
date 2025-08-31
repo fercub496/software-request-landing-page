@@ -1,33 +1,9 @@
 import NextAuth, { NextAuthOptions, Session, User as NextAuthUser,DefaultSession, DefaultUser } from "next-auth"
-import { JWT as DefaultJWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "../lib/mongodb";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
-
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      role: string;
-      name: string;
-      email: string;
-    } & DefaultSession["user"];
-  }
-  interface User extends DefaultUser {
-    id: string;
-    role: string;
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT extends DefaultJWT {
-    id: string;
-    role: string;
-    name: string;
-    email: string;
-  }
-}
+import { JWT } from "next-auth/jwt";
 
 export const authOptions: NextAuthOptions = {
   providers: [
